@@ -1,0 +1,101 @@
+import React, { Component } from 'react';
+import Products from './Products';
+import { BrowserRouter, Route, Link } from "react-router-dom";
+import SpecificProduct from './SpecificProduct';
+
+const imgLinks = require('./imgLinks').imgLinks;
+
+
+const storeProducts = [
+    {
+        "id": 1325,
+        "title": "Skinny Bar Necklace",
+        "price": "61.95"
+    },
+    {
+        "id": 1329,
+        "title": "Skinny Bar Bracelet",
+        "price": "94.95"
+    },
+    {
+        "id": 1330,
+        "title": "Classic title Necklace",
+        "price": "49.95"
+    },
+    {
+        "id": 1335,
+        "title": "Dainty Bar Necklace",
+        "price": "39.95"
+    },
+    {
+        "id": 1336,
+        "title": "Roman Numeral Ring &amp; Bar Necklace Set",
+        "price": "99.95"
+    },
+    {
+        "id": 1337,
+        "title": "Initial Earring &amp; Sideways Initial Necklace Set",
+        "price": "84.95"
+    },
+    {
+        "id": 1340,
+        "title": "Heart Bracelet &amp; Earring Set",
+        "price": "119.95"
+    },
+    {
+        "id": 1341,
+        "title": "Monogram Necklace &amp; Earring Set",
+        "price": "179.95"
+    },
+    {
+        "id": 1342,
+        "title": "Infinity Jewelry Set",
+        "price": "125.95"
+    },
+    {
+        "id": 1343,
+        "title": "Ring With Hands And Heart",
+        "price": "119.95"
+    }
+]
+
+class HomePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: storeProducts,
+            specificProduct:''
+        }
+    }
+
+    displayProducts(){
+        console.log('display');
+        
+        const cards= [];
+        this.state.products.map((product, index) => {
+            return cards.push(<Products key={index} product={product} getChildData={this.getChildData}  />);
+        })
+        return cards;
+    }
+
+    getChildData = (dataFromChild) => {
+        console.log('getting');
+        
+        this.setState({specificProduct:dataFromChild})
+    }
+    render() {
+        return (
+            <div className="row">
+                {this.displayProducts()}
+                {/* <Route path={`/product/${this.state.specificProduct.id}`} render={(routerProps) => (
+                        <SpecificProduct
+                            {...routerProps}
+                            product={this.state.specificProduct.id}
+                        />
+                    )}/> */}
+            </div>
+        );
+    }
+}
+
+export default HomePage;

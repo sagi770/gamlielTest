@@ -1,0 +1,28 @@
+import React, { Component } from "react";
+import HomePage from "./HomePage";
+import SpecificProduct from './SpecificProduct';
+import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
+
+
+class NavBar extends Component {
+ 
+  render() {
+    return (
+      <div>
+        <nav class="navbar navbar-light bg-light">
+          <span class="navbar-brand mb-0 h1">Web Shopping</span>
+          
+          <Route exact path={'/'}><HomePage/></Route> 
+          <Route path={`/product/:productId`} render={(routerProps) => (
+                        <SpecificProduct
+                            {...routerProps}
+                            product={this.props.product}
+                        />
+                    )}/>
+        </nav>
+      </div>
+    );
+  }
+}
+
+export default NavBar;
